@@ -26,15 +26,28 @@ const server = app.listen(port, listening);
 // const server = app.listen(port, ()=>(console.log(`running on localhost: ${port}`)})
 // Callback to debug
 function listening() {
-    console.log('server running');
     console.log(`running on localhost: ${port}`);
 }
 
-// GET route
-const data = []
-app.post('/addMovie', addMovie);
+/// GET route
+app.get('/all', sendData);
 
-function addMovie (request, response) {
-  data.push(require.body)
-  console.log(data);
+function sendData (request, response) {
+  response.send(projectData);
+};
+
+// POST route
+app.post('/add', callBack);
+
+function callBack(req,res){
+  res.send('POST received');
 }
+
+// POST an animal
+const data = [];
+
+app.post('/animal', addAnimal);
+
+function addAnimal (req,res){
+    data.push(req.body);
+};

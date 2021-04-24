@@ -1,9 +1,8 @@
-/* Function to POST data */
 const postData = async ( url = '', data = {})=>{
-  console.log(data)
+
     const response = await fetch(url, {
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    credentials: 'same-origin', // include, *same-origin, omit
+    method: 'POST', 
+    credentials: 'same-origin', 
     headers: {
         'Content-Type': 'application/json',
     },
@@ -12,13 +11,19 @@ const postData = async ( url = '', data = {})=>{
 
     try {
       const newData = await response.json();
-      // console.log(newData);
       return newData
     }catch(error) {
     console.log("error", error);
-    // appropriately handle the error
     }
 }
-
-// TODO-Call Function
-postData('/addAnimal', {animal:'dog'})
+const retrieveData = async (url='') =>{ 
+    const request = await fetch(url);
+    try {
+    // Transform into JSON
+    const allData = await request.json()
+    }
+    catch(error) {
+      console.log("error", error);
+      // appropriately handle the error
+    }
+  }
