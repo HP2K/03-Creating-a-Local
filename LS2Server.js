@@ -29,25 +29,54 @@ function listening() {
     console.log(`running on localhost: ${port}`);
 }
 
-/// GET route
-app.get('/all', sendData);
+//dummie API endpoint
+const fakeData = {
+  animal: 'lion',
+  fakt: 'lions are fun'
+}
 
-function sendData (request, response) {
-  response.send(projectData);
-};
+app.get('/fakeAnimalData', getfakeData)
+
+function getfakeData (req, res) {
+  res.send(fakeData);
+}
+
+const animalData = [];
+
+/// GET route
+app.get('/all', getData);
+
+function getData (req, res) {
+  res.send(animalData);
+  console.log(animalData)
+}
+
 
 // POST route
-app.post('/add', callBack);
+app.post('/addAnimal', addAnimal);
 
-function callBack(req,res){
-  res.send('POST received');
+function addAnimal(req,res){
+
+  newEntry = { 
+    animal: req.body.animal,
+    facts: req.body.fact,
+    fav: req.body.fav
+   }
+
+   animalData.push(newEntry)
+   res.send(animalData)
+   console.log(animalData);
 }
 
 // POST an animal
-const data = [];
+//const data = [];
 
-app.post('/animal', addAnimal);
+//app.post('/animal', addAnimal);
 
-function addAnimal (req,res){
-    data.push(req.body);
-};
+//function addAnimal (req,res){
+  //  data.push(req.body);
+//};
+
+
+
+
